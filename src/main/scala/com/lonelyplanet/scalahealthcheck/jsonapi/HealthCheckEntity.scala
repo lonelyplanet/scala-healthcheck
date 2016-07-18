@@ -16,7 +16,7 @@ case class HealthCheckEntity(
 )
 
 object HealthCheckEntity {
-  private val HealthCheckType = "op-service"
+  private val HealthCheckType = "service"
 
   implicit val healthCheckJsonapiFormat =
     new JsonapiRootObjectWriter[HealthCheckEntity] {
@@ -52,9 +52,9 @@ object HealthCheckEntity {
   private def attributes(serviceConfig: ServiceConfig): Option[Attributes] = {
     Some(
         List(
-            Attribute("lp-service-group-id",
+            Attribute("service-group-id",
                       StringValue(serviceConfig.serviceInfo.groupId)),
-            Attribute("lp-service-id",
+            Attribute("service-id",
                       StringValue(serviceConfig.serviceInfo.name)),
             Attribute(
                 "contact-info",

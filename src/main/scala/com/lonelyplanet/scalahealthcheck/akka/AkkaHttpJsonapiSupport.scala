@@ -11,16 +11,19 @@ import org.zalando.jsonapi._
 trait AkkaHttpJsonapiSupport
     extends SprayJsonJsonapiFormat
     with DefaultJsonProtocol {
-  implicit def akkaHttpJsonJsonapiMarshaller[T: JsonapiRootObjectWriter]
+  def akkaHttpJsonJsonapiMarshaller[T: JsonapiRootObjectWriter]
     : ToEntityMarshaller[T] =
     Marshaller.withFixedContentType(`application/vnd.api+json`)(
         _.rootObject.toJson.compactPrint)
 
-  implicit def akkaHttpJsonJsonapiUnmarshaller[T: JsonapiRootObjectReader]
+  def akkaHttpJsonJsonapiUnmarshaller[T: JsonapiRootObjectReader]
     : FromEntityUnmarshaller[T] =
     Unmarshaller.stringUnmarshaller
       .forContentTypes(`application/vnd.api+json`)
       .map(_.parseJson.convertTo[RootObject].jsonapi[T])
 }
 
-object AkkaHttpJsonapiSupport extends AkkaHttpJsonapiSupport
+object AkkaHttpJsonapiSupport extends AkkaHttpJsonapiSupport {
+  override implicit def akkaHttpJsonJsonapiMarshaller[T: JsonapiRootObjectWriter]: ToEntityMarshaller[T] = super.akkaHttpJsonJsonapiMarshaller
+  override implicit def akkaHttpJsonJsonapiUnmarshaller[T: JsonapiRootObjectReader]: FromEntityUnmarshaller[T] = super.akkaHttpJsonJsonapiUnmarshaller
+}

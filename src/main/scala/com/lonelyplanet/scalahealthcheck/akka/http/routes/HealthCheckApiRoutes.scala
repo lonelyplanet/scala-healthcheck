@@ -1,4 +1,4 @@
-package com.lonelyplanet.scalahealthcheck.example
+package com.lonelyplanet.scalahealthcheck.akka.http.routes
 
 import akka.actor.ActorSystem
 import com.lonelyplanet.scalahealthcheck._
@@ -9,20 +9,17 @@ import akka.AkkaHttpJsonapiSupport._
 import scala.collection.immutable.Seq
 import scala.concurrent.ExecutionContextExecutor
 
-class HealthCheckApi(implicit val system: ActorSystem, implicit val executor: ExecutionContextExecutor) {
-  val dbHealthCheck = new DatabaseHealthCheckerImpl("localhost", 3306)
-
+class HealthCheckApiRoutes(healthChecker: DatabaseHealthChecker, healthCheckEndpoint: String)(implicit val system: ActorSystem, implicit val executor: ExecutionContextExecutor) {
   val routes = {
     get {
-      path("health-check") {
+      path(healthCheckEndpoint) {
         parameters("include".?) { maybeInclude =>
           complete {
-            val dbServiceDependency =
-              ServiceDependency.ArticlesDBServiceDependency
+            val dbServiceDependency = ServiceDependency.DBServiceDependency
             val maybeDbDependency = for {
               include <- maybeInclude if include == "dependencies"
             } yield {
-              DatabaseDependency(dbServiceDependency, dbHealthCheck.check)
+              DatabaseDependency(dbServiceDependency, healthChecker.check)
             }
 
             HealthCheckEntity(
@@ -35,8 +32,4 @@ class HealthCheckApi(implicit val system: ActorSystem, implicit val executor: Ex
       }
     }
   }
-}
-
-class DatabaseHealthCheckerImpl(serverName: String, port: Int) extends DatabaseHealthChecker {
-  def check: DatabaseHealth = DatabaseHealth(serverName, port, isConnectable = true) // TODO
 }

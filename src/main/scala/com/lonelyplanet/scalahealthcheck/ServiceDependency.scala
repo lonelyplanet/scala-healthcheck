@@ -10,8 +10,8 @@ case class DatabaseServiceDependency(override val id: String) extends ServiceDep
 
 object ServiceDependency {
   val DatabaseType = "database-dependency-report"
-  val DatabaseId = "db-articles"
-  val ArticlesDBServiceDependency = DatabaseServiceDependency(DatabaseId)
+  val DatabaseId = "db-id"
+  val DBServiceDependency = DatabaseServiceDependency(DatabaseId)
 
   def asResourceObject(o: ServiceDependency): ResourceObject = ResourceObject(
     `type` = o.`type`,
@@ -63,16 +63,18 @@ case class DatabaseHealth(
   isConnectable: Boolean,
   message: String
 )
+
 object DatabaseHealth {
   private val DatabaseConnectableMessage = "No problems found"
   private val DatabaseNotConnectableMessage = "Could not connect to database"
 
-  def apply(databaseHost: String, databasePort: Int, isConnectable: Boolean): DatabaseHealth = {
-    val message = if (isConnectable) DatabaseConnectableMessage else DatabaseNotConnectableMessage
+  def apply(databaseHost: String, databasePort: Int, isConnectable: => Boolean): DatabaseHealth = {
+    val didManageToConnect = isConnectable
+    val message = if (didManageToConnect) DatabaseConnectableMessage else DatabaseNotConnectableMessage
 
     DatabaseHealth(
       location = s"$databaseHost:$databasePort",
-      isConnectable = isConnectable,
+      isConnectable = didManageToConnect,
       message = message
     )
   }

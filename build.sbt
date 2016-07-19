@@ -40,3 +40,36 @@ ScalariformKeys.preferences := ScalariformKeys.preferences.value
   .setPreference(DoubleIndentClassDeclaration, true)
   .setPreference(SpacesAroundMultiImports, false)
   .setPreference(CompactControlReadability, false)
+
+bintrayOrganization := Some("lonelyplanet")
+
+licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
+
+val doNotPublishSettings = Seq(publish := {})
+
+val publishSettings =
+  if (version.toString.endsWith("-SNAPSHOT"))
+    Seq(
+      publishTo := Some("Artifactory Realm" at "http://oss.jfrog.org/artifactory/oss-snapshot-local"),
+      bintrayReleaseOnPublish := false,
+      credentials := List(Path.userHome / ".bintray" / ".artifactory").filter(_.exists).map(Credentials(_))
+    )
+  else
+    Seq(
+      organization := "com.lonelyplanet",
+      pomExtra := <scm>
+        <url>https://github.com/lonelyplanet/scala-healthcheck</url>
+        <connection>https://github.com/lonelyplanet/scala-healthcheck</connection>
+      </scm>
+        <developers>
+          <developer>
+            <id>wlk</id>
+            <name>Wojciech Langiewicz</name>
+            <url>https://github.com/lonelyplanet/scala-healthcheck</url>
+          </developer>
+        </developers>,
+      publishArtifact in Test := false,
+      homepage := Some(url("https://github.com/lonelyplanet/scala-healthcheck")),
+      publishMavenStyle := false,
+      resolvers += Resolver.url("lonelyplanet ivy resolver", url("http://dl.bintray.com/lonelyplanet/maven"))(Resolver.ivyStylePatterns)
+    )

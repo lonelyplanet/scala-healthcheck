@@ -8,8 +8,7 @@ case class DatabaseServiceDependency(override val id: String) extends ServiceDep
 
 object ServiceDependency {
   val DatabaseType = "database-dependency-report"
-  val DatabaseId = "db-id"
-  val DBServiceDependency = DatabaseServiceDependency(DatabaseId)
+  def dbServiceDependency(id: String) = DatabaseServiceDependency(id)
 
   def asResourceObject(o: ServiceDependency): ResourceObject = ResourceObject(
     `type` = o.`type`,

@@ -15,7 +15,7 @@ object ServiceConfig {
   private val GitHubRepoKey = "github-repo"
   private val DockerImageKey = "docker-image"
 
-  def apply(config: Config): ServiceConfig = {
+  def fromConfig(config: Config): ServiceConfig = {
     val service = config.getConfig(ServiceKey)
     val name = service.getString(NameKey)
     val environment = service.getString(EnvironmentKey)

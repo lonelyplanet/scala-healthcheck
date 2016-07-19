@@ -9,8 +9,7 @@ import akka.AkkaHttpJsonapiSupport._
 import scala.collection.immutable.Seq
 import scala.concurrent.ExecutionContextExecutor
 
-class HealthCheckApi(implicit val system: ActorSystem,
-                     implicit val executor: ExecutionContextExecutor) {
+class HealthCheckApi(implicit val system: ActorSystem, implicit val executor: ExecutionContextExecutor) {
   val dbHealthCheck = new DatabaseHealthCheckerImpl("localhost", 3306)
 
   val routes = {
@@ -26,9 +25,11 @@ class HealthCheckApi(implicit val system: ActorSystem,
               DatabaseDependency(dbServiceDependency, dbHealthCheck.check)
             }
 
-            HealthCheckEntity(ServiceConfig(ConfigFactory.load()),
-                              Seq(dbServiceDependency),
-                              maybeDbDependency)
+            HealthCheckEntity(
+              ServiceConfig(ConfigFactory.load()),
+              Seq(dbServiceDependency),
+              maybeDbDependency
+            )
           }
         }
       }
@@ -36,8 +37,6 @@ class HealthCheckApi(implicit val system: ActorSystem,
   }
 }
 
-class DatabaseHealthCheckerImpl(serverName: String, port: Int)
-    extends DatabaseHealthChecker {
-  def check: DatabaseHealth =
-    DatabaseHealth(serverName, port, isConnectable = true) // TODO
+class DatabaseHealthCheckerImpl(serverName: String, port: Int) extends DatabaseHealthChecker {
+  def check: DatabaseHealth = DatabaseHealth(serverName, port, isConnectable = true) // TODO
 }

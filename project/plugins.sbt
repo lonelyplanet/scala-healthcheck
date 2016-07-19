@@ -1,3 +1,5 @@
 logLevel := Level.Warn
 
-addSbtPlugin("com.geirsson" % "sbt-scalafmt" % "0.2.11")
+resolvers += Resolver.typesafeRepo("releases")
+
+addSbtPlugin("org.scalariform" % "sbt-scalariform" % "1.6.0")

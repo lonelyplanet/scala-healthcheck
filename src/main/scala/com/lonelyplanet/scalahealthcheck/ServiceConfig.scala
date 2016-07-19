@@ -2,9 +2,7 @@ package com.lonelyplanet.scalahealthcheck
 
 import com.typesafe.config.Config
 
-case class ServiceConfig(serviceInfo: ServiceInfo,
-                         contactInfo: ContactInfo,
-                         buildInfo: BuildInfo)
+case class ServiceConfig(serviceInfo: ServiceInfo, contactInfo: ContactInfo, buildInfo: BuildInfo)
 
 object ServiceConfig {
   private val ServiceKey = "service"
@@ -29,15 +27,13 @@ object ServiceConfig {
     val dockerImage = service.getString(DockerImageKey)
 
     ServiceConfig(
-        serviceInfo = ServiceInfo(name, groupId, environment),
-        contactInfo = ContactInfo(ownerSlackId, slackChannel),
-        buildInfo = BuildInfo(githubCommit, githubRepo, dockerImage)
+      serviceInfo = ServiceInfo(name, groupId, environment),
+      contactInfo = ContactInfo(ownerSlackId, slackChannel),
+      buildInfo = BuildInfo(githubCommit, githubRepo, dockerImage)
     )
   }
 }
 
 case class ContactInfo(serviceOwnerSlackId: String, slackChannel: String)
 case class ServiceInfo(name: String, groupId: String, environment: String)
-case class BuildInfo(githubCommit: String,
-                     githubRepoName: String,
-                     dockerImage: String)
+case class BuildInfo(githubCommit: String, githubRepoName: String, dockerImage: String)

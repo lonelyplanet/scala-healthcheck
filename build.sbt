@@ -1,3 +1,7 @@
+import scalariform.formatter.preferences._
+import com.typesafe.sbt.SbtScalariform
+import com.typesafe.sbt.SbtScalariform.ScalariformKeys
+
 name := "scala-healthcheck"
 
 version := "0.1"
@@ -29,4 +33,10 @@ libraryDependencies ++= {
   providedDependencies ++ testDependencies
 }
 
-reformatOnCompileSettings
+SbtScalariform.scalariformSettings
+
+ScalariformKeys.preferences := ScalariformKeys.preferences.value
+  .setPreference(AlignSingleLineCaseStatements, true)
+  .setPreference(DoubleIndentClassDeclaration, true)
+  .setPreference(SpacesAroundMultiImports, false)
+  .setPreference(CompactControlReadability, false)

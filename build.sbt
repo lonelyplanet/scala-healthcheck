@@ -18,6 +18,10 @@ libraryDependencies ++= {
   val akkaVersion           = "2.4.8"
   val scalaJsonAPIVersion   = "0.5.0"
 
+  val dependencies = Seq(
+    "com.lonelyplanet"     %% "scala-util"                           % "0.1.3"
+  )
+
   val providedDependencies = Seq(
     "com.typesafe.akka"    %% "akka-actor"                           % akkaVersion % "provided",
     "com.typesafe.akka"    %% "akka-slf4j"                           % akkaVersion % "provided",
@@ -32,7 +36,7 @@ libraryDependencies ++= {
       "com.typesafe.akka"    %% "akka-http-testkit"                    % akkaVersion % "test"
     )
 
-  providedDependencies ++ testDependencies
+  providedDependencies ++ testDependencies ++ dependencies
 }
 
 SbtScalariform.scalariformSettings

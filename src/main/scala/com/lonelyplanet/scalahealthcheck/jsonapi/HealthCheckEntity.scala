@@ -1,7 +1,7 @@
 package com.lonelyplanet.scalahealthcheck.jsonapi
 
-import com.lonelyplanet.scalahealthcheck.util.OptionConversions
 import com.lonelyplanet.scalahealthcheck.{DatabaseDependency, ServiceConfig, ServiceDependency}
+import com.lonelyplanet.util.OptionConversions
 import org.zalando.jsonapi.JsonapiRootObjectWriter
 import org.zalando.jsonapi.model.JsonApiObject.{JsObjectValue, StringValue}
 import org.zalando.jsonapi.model.RootObject.{ResourceObject, ResourceObjects}

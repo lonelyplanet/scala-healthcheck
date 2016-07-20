@@ -6,7 +6,7 @@
 
 [ ![Download](https://api.bintray.com/packages/lonelyplanet/maven/scala-healthcheck/images/download.svg) ](https://bintray.com/lonelyplanet/maven/scala-healthcheck/_latestVersion)
 
-    "com.lonelyplanet" %% "scala-healthcheck" % "0.2.0"
+    "com.lonelyplanet" %% "scala-healthcheck" % "0.2.1"
 
 ### Description
 
@@ -22,7 +22,8 @@ Modules:
 ### Changelog
 
 0.2
-- Improved customization
+- Improved customization  
+
 0.1
 - First public release
 

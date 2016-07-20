@@ -10,7 +10,10 @@ version := "0.2.1"
 
 scalaVersion := "2.11.8"
 
-resolvers += "Sonatype release repository" at "https://oss.sonatype.org/content/repositories/releases/"
+resolvers ++= Seq(
+  "Sonatype release repository" at "https://oss.sonatype.org/content/repositories/releases/",
+  Resolver.bintrayRepo("lonelyplanet", "maven")
+)
 
 scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
 

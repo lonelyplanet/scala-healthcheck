@@ -1,5 +1,7 @@
 # scala-healthcheck
 
+[![Join the chat at https://gitter.im/lonelyplanet/scala-healthcheck](https://badges.gitter.im/lonelyplanet/scala-healthcheck.svg)](https://gitter.im/lonelyplanet/scala-healthcheck?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://travis-ci.org/lonelyplanet/scala-healthcheck.svg?branch=master)](https://travis-ci.org/lonelyplanet/scala-healthcheck)
 
 ### Downloading

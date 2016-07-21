@@ -4,13 +4,13 @@ import org.zalando.jsonapi.model.Attribute
 import org.zalando.jsonapi.model.JsonApiObject.StringValue
 import org.zalando.jsonapi.model.RootObject.ResourceObject
 
-case class DatabaseDependency(`type`: String, id: String, location: String, status: DependencyStatus, description: String)
+case class DependencyDetails(`type`: String, id: String, location: String, status: DependencyStatus, description: String)
 
-object DatabaseDependency {
-  def apply(databaseServiceDependency: DatabaseServiceDependency, databaseHealth: DatabaseHealth): DatabaseDependency = {
-    val status = if (databaseHealth.isConnectable) DependencyStatusGreen else DependencyStatusRed
+object DependencyDetails {
+  def apply(databaseServiceDependency: ServiceDependency, databaseHealth: HealthCheckResult): DependencyDetails = {
+    val status = if (databaseHealth.isServiceOk) DependencyStatusGreen else DependencyStatusRed
 
-    DatabaseDependency(
+    DependencyDetails(
       databaseServiceDependency.`type`,
       databaseServiceDependency.id,
       databaseHealth.location,
@@ -19,7 +19,7 @@ object DatabaseDependency {
     )
   }
 
-  def asResourceObject(o: DatabaseDependency): ResourceObject =
+  def asResourceObject(o: DependencyDetails): ResourceObject =
     ResourceObject(
       `type` = o.`type`,
       id = Some(o.id),

@@ -8,24 +8,26 @@ import _root_.akka.http.scaladsl.server.Directives._
 import akka.AkkaHttpJsonapiSupport._
 import scala.collection.immutable.Seq
 import scala.concurrent.ExecutionContextExecutor
+import com.lonelyplanet.util.OptionConversions._
 
-class HealthCheckApiRoutes(healthChecker: DatabaseHealthChecker, healthCheckEndpoint: String)(implicit val system: ActorSystem, implicit val executor: ExecutionContextExecutor) {
+class HealthCheckApiRoutes(dependencies: Seq[ServiceDependency], healthCheckEndpoint: String)(implicit val system: ActorSystem, implicit val executor: ExecutionContextExecutor) {
   val routes = {
     get {
       path(healthCheckEndpoint) {
         parameters("include".?) { maybeInclude =>
           complete {
-            val dbServiceDependency = ServiceDependency.dbServiceDependency("db-id")
-            val maybeDbDependency = for {
-              include <- maybeInclude if include == "dependencies"
-            } yield {
-              DatabaseDependency(dbServiceDependency, healthChecker.check)
-            }
+
+            val dependencyDetails = wrapOption(
+              maybeInclude.contains("dependencies"),
+              dependencies.map { d =>
+                DependencyDetails(d, d.healthChecker.check)
+              }
+            ).getOrElse(Seq.empty)
 
             HealthCheckEntity(
               ServiceConfig.fromConfig(ConfigFactory.load()),
-              Seq(dbServiceDependency),
-              maybeDbDependency
+              dependencies,
+              dependencyDetails
             )
           }
         }

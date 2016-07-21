@@ -1,7 +1,7 @@
 package com.lonelyplanet.scalahealthcheck.jsonapi
 
-import com.lonelyplanet.scalahealthcheck.{DatabaseDependency, ServiceConfig, ServiceDependency}
-import com.lonelyplanet.util.OptionConversions
+import com.lonelyplanet.scalahealthcheck.{DependencyDetails, ServiceConfig, ServiceDependency}
+import com.lonelyplanet.util.OptionConversions._
 import org.zalando.jsonapi.JsonapiRootObjectWriter
 import org.zalando.jsonapi.model.JsonApiObject.{JsObjectValue, StringValue}
 import org.zalando.jsonapi.model.RootObject.{ResourceObject, ResourceObjects}
@@ -12,7 +12,7 @@ import scala.collection.immutable.Seq
 case class HealthCheckEntity(
   serviceConfig: ServiceConfig,
   serviceDependencies: Seq[ServiceDependency],
-  maybeDatabaseDependency: Option[DatabaseDependency]
+  dependencyDetails: Seq[DependencyDetails]
 )
 
 object HealthCheckEntity {
@@ -30,20 +30,20 @@ object HealthCheckEntity {
               relationships = relationships(h.serviceDependencies)
             )
           ),
-          included = included(h.maybeDatabaseDependency)
+          included = included(h.dependencyDetails)
         )
       }
 
     }
   private def relationships(serviceDependencies: Seq[ServiceDependency]): Option[Map[String, Relationship]] = {
     for {
-      serviceDependencies <- OptionConversions.seqToOption(serviceDependencies)
+      serviceDependencies <- seqToOption(serviceDependencies)
     } yield {
       Map(
         "dependencies" ->
           Relationship(
             data = Some(ResourceObjects(serviceDependencies.map(
-              ServiceDependency.asResourceObject
+              _.asResourceObject
             )))
           )
       )
@@ -96,17 +96,14 @@ object HealthCheckEntity {
     )
   }
 
-  private def included(maybeDatabaseDependency: Option[DatabaseDependency]): Option[Included] = {
-    for {
-      databaseDependency <- maybeDatabaseDependency
-    } yield {
+  private def included(dependencies: Seq[DependencyDetails]): Option[Included] = {
+    wrapOption(
+      dependencies.nonEmpty,
       Included(
         ResourceObjects(
-          List(
-            DatabaseDependency.asResourceObject(databaseDependency)
-          )
+          dependencies.map(DependencyDetails.asResourceObject)
         )
       )
-    }
+    )
   }
 }

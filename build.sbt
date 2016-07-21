@@ -6,7 +6,7 @@ name := "scala-healthcheck"
 
 organization := "com.lonelyplanet"
 
-version := "0.2.1"
+version := "0.2.2-SNAPSHOT"
 
 scalaVersion := "2.11.8"
 
@@ -20,9 +20,11 @@ scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
 libraryDependencies ++= {
   val akkaVersion           = "2.4.8"
   val scalaJsonAPIVersion   = "0.5.0"
+  val scalaUtilVersion      = "0.1.6"
+  val scalaTestVersion      = "3.0.0-M15"
 
   val dependencies = Seq(
-    "com.lonelyplanet"     %% "scala-util"                           % "0.1.3"
+    "com.lonelyplanet"     %% "scala-util"                           % scalaUtilVersion
   )
 
   val providedDependencies = Seq(
@@ -36,8 +38,9 @@ libraryDependencies ++= {
   )
 
   val testDependencies = Seq(
-      "com.typesafe.akka"    %% "akka-http-testkit"                    % akkaVersion % "test"
-    )
+    "com.typesafe.akka"    %% "akka-http-testkit"                    % akkaVersion % "test",
+    "org.scalatest"        %% "scalatest"                            % scalaTestVersion % "test"
+  )
 
   providedDependencies ++ testDependencies ++ dependencies
 }

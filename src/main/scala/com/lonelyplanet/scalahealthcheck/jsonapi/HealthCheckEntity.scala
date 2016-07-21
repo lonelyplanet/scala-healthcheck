@@ -43,7 +43,7 @@ object HealthCheckEntity {
         "dependencies" ->
           Relationship(
             data = Some(ResourceObjects(serviceDependencies.map(
-              ServiceDependency.asResourceObject
+              _.asResourceObject
             )))
           )
       )

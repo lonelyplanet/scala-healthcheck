@@ -15,7 +15,7 @@ class HealthCheckApiRoutes(healthChecker: DatabaseHealthChecker, healthCheckEndp
       path(healthCheckEndpoint) {
         parameters("include".?) { maybeInclude =>
           complete {
-            val dbServiceDependency = ServiceDependency.dbServiceDependency("db-id")
+            val dbServiceDependency = DatabaseServiceDependency("db-id")
             val maybeDbDependency = for {
               include <- maybeInclude if include == "dependencies"
             } yield {

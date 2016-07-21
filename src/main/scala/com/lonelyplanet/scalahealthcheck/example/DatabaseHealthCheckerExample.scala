@@ -9,5 +9,5 @@ class DatabaseHealthCheckerExample(serverName: String, port: Int) extends Health
     rand > 50
   }
 
-  def check: HealthCheckResult = HealthCheckResult(serverName, port, isConnectable = checkConnectivity)
+  def check: HealthCheckResult = DatabaseHealthCheckResult(serverName, port, isGreenFunction = checkConnectivity)
 }

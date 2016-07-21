@@ -1,7 +1,7 @@
 package com.lonelyplanet.scalahealthcheck.util
 
-import com.lonelyplanet.scalahealthcheck.{HealthCheckResult, HealthChecker}
+import com.lonelyplanet.scalahealthcheck.{DatabaseHealthCheckResult, HealthCheckResult, HealthChecker}
 
 class AlwaysRedHealthCheck extends HealthChecker {
-  override def check: HealthCheckResult = HealthCheckResult("host", 3306, isConnectable = false)
+  override def check: HealthCheckResult = DatabaseHealthCheckResult("host", 3306, isGreenFunction = false)
 }

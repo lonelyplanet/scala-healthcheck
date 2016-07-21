@@ -8,7 +8,7 @@ case class DependencyDetails(`type`: String, id: String, location: String, statu
 
 object DependencyDetails {
   def apply(databaseServiceDependency: ServiceDependency, databaseHealth: HealthCheckResult): DependencyDetails = {
-    val status = if (databaseHealth.isConnectable) DependencyStatusGreen else DependencyStatusRed
+    val status = if (databaseHealth.isServiceOk) DependencyStatusGreen else DependencyStatusRed
 
     DependencyDetails(
       databaseServiceDependency.`type`,

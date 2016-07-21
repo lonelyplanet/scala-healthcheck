@@ -16,6 +16,7 @@ class HealthCheckApiRoutes(dependencies: Seq[ServiceDependency], healthCheckEndp
       path(healthCheckEndpoint) {
         parameters("include".?) { maybeInclude =>
           complete {
+
             val dependencyDetails = wrapOption(
               maybeInclude.contains("dependencies"),
               dependencies.map { d =>

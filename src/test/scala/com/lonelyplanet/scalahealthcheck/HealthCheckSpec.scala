@@ -15,6 +15,6 @@ class HealthCheckSpec extends FlatSpec with Matchers with ScalatestRouteTest {
 
   it should "return dependency with health check result" in {
     val dbDependency = DatabaseServiceDependency(new AlwaysGreenHealthCheck, "green-db")
-    dbDependency.healthChecker.check.isConnectable shouldBe true
+    dbDependency.healthChecker.check.isServiceOk shouldBe true
   }
 }

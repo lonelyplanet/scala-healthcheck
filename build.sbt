@@ -6,7 +6,7 @@ name := "scala-healthcheck"
 
 organization := "com.lonelyplanet"
 
-version := "0.2.2-SNAPSHOT"
+version := "0.2.2"
 
 scalaVersion := "2.11.8"
 

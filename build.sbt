@@ -6,13 +6,12 @@ name := "scala-healthcheck"
 
 organization := "com.lonelyplanet"
 
-version := "0.2.2"
+version := "0.2.2-SNAPSHOT"
 
 scalaVersion := "2.11.8"
 
 resolvers ++= Seq(
-  "Sonatype release repository" at "https://oss.sonatype.org/content/repositories/releases/",
-  Resolver.bintrayRepo("lonelyplanet", "maven")
+  "Sonatype release repository" at "https://oss.sonatype.org/content/repositories/releases/"
 )
 
 scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
@@ -20,7 +19,7 @@ scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
 libraryDependencies ++= {
   val akkaVersion           = "2.4.8"
   val scalaJsonAPIVersion   = "0.5.0"
-  val scalaUtilVersion      = "0.1.3"
+  val scalaUtilVersion      = "0.1.6"
   val scalaTestVersion      = "3.0.0-M15"
 
   val dependencies = Seq(

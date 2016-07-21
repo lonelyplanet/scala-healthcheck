@@ -1,16 +1,16 @@
 package com.lonelyplanet.scalahealthcheck
 
-case class DatabaseHealth(location: String, isConnectable: Boolean, message: String)
+case class HealthCheckResult(location: String, isConnectable: Boolean, message: String)
 
-object DatabaseHealth {
+object HealthCheckResult {
   private val DatabaseConnectableMessage = "No problems found"
   private val DatabaseNotConnectableMessage = "Could not connect to database"
 
-  def apply(databaseHost: String, databasePort: Int, isConnectable: => Boolean): DatabaseHealth = {
+  def apply(databaseHost: String, databasePort: Int, isConnectable: => Boolean): HealthCheckResult = {
     val didManageToConnect = isConnectable
     val message = if (didManageToConnect) DatabaseConnectableMessage else DatabaseNotConnectableMessage
 
-    DatabaseHealth(
+    HealthCheckResult(
       location = s"$databaseHost:$databasePort",
       isConnectable = didManageToConnect,
       message = message

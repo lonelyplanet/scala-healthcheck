@@ -13,9 +13,9 @@ object TestResponses {
       |        "service-owner-slackid": "@wlk",
       |        "slack-channel": "#testing"
       |      },
-      |      "service-group-id": "scala",
+      |      "lp-service-group-id": "scala",
       |      "github-commit": "unknown",
-      |      "service-id": "scala-healthcheck",
+      |      "lp-service-id": "scala-healthcheck",
       |      "github-repo-name": "scala-healthcheck",
       |      "docker-image": "unknown"
       |    },
@@ -44,9 +44,9 @@ object TestResponses {
       |        "service-owner-slackid": "@wlk",
       |        "slack-channel": "#testing"
       |      },
-      |      "service-group-id": "scala",
+      |      "lp-service-group-id": "scala",
       |      "github-commit": "unknown",
-      |      "service-id": "scala-healthcheck",
+      |      "lp-service-id": "scala-healthcheck",
       |      "github-repo-name": "scala-healthcheck",
       |      "docker-image": "unknown"
       |    },
@@ -86,9 +86,9 @@ object TestResponses {
       |        "service-owner-slackid": "@wlk",
       |        "slack-channel": "#testing"
       |      },
-      |      "service-group-id": "scala",
+      |      "lp-service-group-id": "scala",
       |      "github-commit": "unknown",
-      |      "service-id": "scala-healthcheck",
+      |      "lp-service-id": "scala-healthcheck",
       |      "github-repo-name": "scala-healthcheck",
       |      "docker-image": "unknown"
       |    },
@@ -120,9 +120,9 @@ object TestResponses {
       |        "service-owner-slackid": "@wlk",
       |        "slack-channel": "#testing"
       |      },
-      |      "service-group-id": "scala",
+      |      "lp-service-group-id": "scala",
       |      "github-commit": "unknown",
-      |      "service-id": "scala-healthcheck",
+      |      "lp-service-id": "scala-healthcheck",
       |      "github-repo-name": "scala-healthcheck",
       |      "docker-image": "unknown"
       |    },

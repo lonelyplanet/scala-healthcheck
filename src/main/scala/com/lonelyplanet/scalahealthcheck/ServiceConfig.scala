@@ -7,8 +7,8 @@ case class ServiceConfig(serviceInfo: ServiceInfo, contactInfo: ContactInfo, bui
 object ServiceConfig {
   private val ServiceKey = "service"
   private val EnvironmentKey = "environment"
-  private val NameKey = "name"
-  private val GroupIdKey = "group-id"
+  private val NameKey = "lp-service-id"
+  private val GroupIdKey = "lp-service-group-id"
   private val OwnerSlackIdKey = "owner-slack-id"
   private val SlackChannelKey = "slack-channel"
   private val GitHubCommitKey = "github-commit"

@@ -54,11 +54,11 @@ object HealthCheckEntity {
     Some(
       List(
         Attribute(
-          "service-group-id",
+          "lp-service-group-id",
           StringValue(serviceConfig.serviceInfo.groupId)
         ),
         Attribute(
-          "service-id",
+          "lp-service-id",
           StringValue(serviceConfig.serviceInfo.name)
         ),
         Attribute(

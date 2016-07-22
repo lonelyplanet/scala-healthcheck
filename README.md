@@ -1,12 +1,11 @@
 # scala-healthcheck
 
 [![Join the chat at https://gitter.im/lonelyplanet/scala-healthcheck](https://badges.gitter.im/lonelyplanet/scala-healthcheck.svg)](https://gitter.im/lonelyplanet/scala-healthcheck?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 [![Build Status](https://travis-ci.org/lonelyplanet/scala-healthcheck.svg?branch=master)](https://travis-ci.org/lonelyplanet/scala-healthcheck)
+[![codecov](https://codecov.io/gh/lonelyplanet/scala-healthcheck/branch/master/graph/badge.svg)](https://codecov.io/gh/lonelyplanet/scala-healthcheck)
+[ ![Download](https://api.bintray.com/packages/lonelyplanet/maven/scala-healthcheck/images/download.svg) ](https://bintray.com/lonelyplanet/maven/scala-healthcheck/_latestVersion)
 
 ### Downloading
-
-[ ![Download](https://api.bintray.com/packages/lonelyplanet/maven/scala-healthcheck/images/download.svg) ](https://bintray.com/lonelyplanet/maven/scala-healthcheck/_latestVersion)
 
     "com.lonelyplanet" %% "scala-healthcheck" % "0.2.3"
 

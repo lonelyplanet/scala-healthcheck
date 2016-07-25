@@ -7,7 +7,7 @@ import com.lonelyplanet.scalahealthcheck.akka.http.routes.HealthCheckApiRoutes
 
 import scala.collection.immutable.Seq
 import _root_.akka.http.scaladsl.model.StatusCodes.OK
-import com.lonelyplanet.scalahealthcheck.akka.AkkaHttpJsonapiSupport._
+import org.zalando.jsonapi.json.akka.http.AkkaHttpJsonapiSupport._
 import com.lonelyplanet.scalahealthcheck.fixtures.TestResponses
 import com.lonelyplanet.scalahealthcheck.util.{AlwaysGreenHealthCheck, AlwaysRedHealthCheck, MockDatabaseHealthChecker}
 

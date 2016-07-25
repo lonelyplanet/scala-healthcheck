@@ -33,8 +33,8 @@ object HealthCheckEntity {
           included = included(h.dependencyDetails)
         )
       }
-
     }
+
   private def relationships(serviceDependencies: Seq[ServiceDependency]): Option[Map[String, Relationship]] = {
     for {
       serviceDependencies <- seqToOption(serviceDependencies)

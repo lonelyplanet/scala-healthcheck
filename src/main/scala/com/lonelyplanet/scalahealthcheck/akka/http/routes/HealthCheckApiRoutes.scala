@@ -5,7 +5,7 @@ import com.lonelyplanet.scalahealthcheck._
 import com.lonelyplanet.scalahealthcheck.jsonapi.HealthCheckEntity
 import com.typesafe.config.ConfigFactory
 import _root_.akka.http.scaladsl.server.Directives._
-import akka.AkkaHttpJsonapiSupport._
+import org.zalando.jsonapi.json.akka.http.AkkaHttpJsonapiSupport._
 import scala.collection.immutable.Seq
 import scala.concurrent.ExecutionContextExecutor
 import com.lonelyplanet.util.OptionConversions._

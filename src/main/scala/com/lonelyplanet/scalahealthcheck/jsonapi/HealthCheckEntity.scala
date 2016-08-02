@@ -16,7 +16,7 @@ case class HealthCheckEntity(
 )
 
 object HealthCheckEntity {
-  private val HealthCheckType = "service"
+  private val HealthCheckType = "op-service"
 
   implicit val healthCheckJsonapiFormat =
     new JsonapiRootObjectWriter[HealthCheckEntity] {

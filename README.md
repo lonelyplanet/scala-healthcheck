@@ -7,7 +7,7 @@
 
 ### Downloading
 
-    "com.lonelyplanet" %% "scala-healthcheck" % "0.2.3"
+    "com.lonelyplanet" %% "scala-healthcheck" % "0.2.5"
 
 ### Description
 

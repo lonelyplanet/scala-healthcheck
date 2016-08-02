@@ -6,7 +6,7 @@ object TestResponses {
     """
       {
       |  "data": {
-      |    "type": "service",
+      |    "type": "op-service",
       |    "id": "scala-healthcheck",
       |    "attributes": {
       |      "contact-info": {
@@ -37,7 +37,7 @@ object TestResponses {
     """
       {
       |  "data": {
-      |    "type": "service",
+      |    "type": "op-service",
       |    "id": "scala-healthcheck",
       |    "attributes": {
       |      "contact-info": {
@@ -79,7 +79,7 @@ object TestResponses {
     """
       |{
       |  "data": {
-      |    "type": "service",
+      |    "type": "op-service",
       |    "id": "scala-healthcheck",
       |    "attributes": {
       |      "contact-info": {
@@ -113,7 +113,7 @@ object TestResponses {
     """
       {
       |  "data": {
-      |    "type": "service",
+      |    "type": "op-service",
       |    "id": "scala-healthcheck",
       |    "attributes": {
       |      "contact-info": {

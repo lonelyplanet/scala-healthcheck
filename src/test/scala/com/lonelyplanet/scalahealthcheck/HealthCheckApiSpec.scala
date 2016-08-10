@@ -11,11 +11,13 @@ import org.zalando.jsonapi.json.akka.http.AkkaHttpJsonapiSupport._
 import com.lonelyplanet.scalahealthcheck.fixtures.TestResponses
 import com.lonelyplanet.scalahealthcheck.util.{AlwaysGreenHealthCheck, AlwaysRedHealthCheck, MockDatabaseHealthChecker}
 
-class HealthCheckApiSpec extends FlatSpec with Matchers with ScalatestRouteTest {
+class HealthCheckApiSpec extends BaseSpec {
   val databaseHealthCheck = new MockDatabaseHealthChecker
+
   val api = new HealthCheckApiRoutes(
     Seq(DatabaseServiceDependency(databaseHealthCheck, "green-db")),
-    "health-check"
+    "health-check",
+    alwaysRespondWithOK = true
   )
 
   "HealthCheck root object" should "should contain data" in {
@@ -83,7 +85,8 @@ class HealthCheckApiSpec extends FlatSpec with Matchers with ScalatestRouteTest 
   it should "return single health check and responses should match expected value" in {
     val healthCheckApi = new HealthCheckApiRoutes(
       Seq(DatabaseServiceDependency(new AlwaysGreenHealthCheck, "green-db")),
-      "health-check"
+      "health-check",
+      alwaysRespondWithOK = true
     )
 
     Get("/health-check") ~> healthCheckApi.routes ~> check {
@@ -105,7 +108,8 @@ class HealthCheckApiSpec extends FlatSpec with Matchers with ScalatestRouteTest 
         DatabaseServiceDependency(new AlwaysGreenHealthCheck, "green-db"),
         DatabaseServiceDependency(new AlwaysRedHealthCheck, "red-db")
       ),
-      "health-check"
+      "health-check",
+      alwaysRespondWithOK = true
     )
 
     Get("/health-check") ~> healthCheckApi.routes ~> check {

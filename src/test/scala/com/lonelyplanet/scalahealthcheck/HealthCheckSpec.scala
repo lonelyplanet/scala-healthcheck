@@ -1,20 +1,14 @@
 package com.lonelyplanet.scalahealthcheck
 
-import _root_.akka.http.scaladsl.testkit.ScalatestRouteTest
-import com.lonelyplanet.scalahealthcheck.util.{AlwaysGreenHealthCheck, AlwaysRedHealthCheck}
-import org.scalatest.{FlatSpec, Matchers}
-
-class HealthCheckSpec extends FlatSpec with Matchers with ScalatestRouteTest {
-  val alwaysGreen = new AlwaysGreenHealthCheck
-  val alwaysRed = new AlwaysRedHealthCheck
+class HealthCheckSpec extends BaseSpec {
 
   it should "be return correct messages" in {
-    alwaysGreen.check.message shouldBe "No problems found"
-    alwaysRed.check.message shouldBe "Could not connect to database"
+    alwaysGreenHealthCheck.check.message shouldBe "No problems found"
+    alwaysRedHealthCheck.check.message shouldBe "Could not connect to database"
   }
 
   it should "return dependency with health check result" in {
-    val dbDependency = DatabaseServiceDependency(new AlwaysGreenHealthCheck, "green-db")
+    val dbDependency = DatabaseServiceDependency(alwaysGreenHealthCheck, "green-db")
     dbDependency.healthChecker.check.isServiceOk shouldBe true
   }
 }

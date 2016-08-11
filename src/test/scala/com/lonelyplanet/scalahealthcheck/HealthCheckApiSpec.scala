@@ -10,14 +10,14 @@ import _root_.akka.http.scaladsl.model.StatusCodes.OK
 import org.zalando.jsonapi.json.akka.http.AkkaHttpJsonapiSupport._
 import com.lonelyplanet.scalahealthcheck.fixtures.TestResponses
 import com.lonelyplanet.scalahealthcheck.util.{AlwaysGreenHealthCheck, AlwaysRedHealthCheck, MockDatabaseHealthChecker}
+import _root_.akka.http.scaladsl.model.StatusCodes.ServiceUnavailable
 
 class HealthCheckApiSpec extends BaseSpec {
   val databaseHealthCheck = new MockDatabaseHealthChecker
 
   val api = new HealthCheckApiRoutes(
     Seq(DatabaseServiceDependency(databaseHealthCheck, "green-db")),
-    "health-check",
-    alwaysRespondWithOK = true
+    "health-check"
   )
 
   "HealthCheck root object" should "should contain data" in {
@@ -86,7 +86,7 @@ class HealthCheckApiSpec extends BaseSpec {
     val healthCheckApi = new HealthCheckApiRoutes(
       Seq(DatabaseServiceDependency(new AlwaysGreenHealthCheck, "green-db")),
       "health-check",
-      alwaysRespondWithOK = true
+      ServiceUnavailable
     )
 
     Get("/health-check") ~> healthCheckApi.routes ~> check {
@@ -108,8 +108,7 @@ class HealthCheckApiSpec extends BaseSpec {
         DatabaseServiceDependency(new AlwaysGreenHealthCheck, "green-db"),
         DatabaseServiceDependency(new AlwaysRedHealthCheck, "red-db")
       ),
-      "health-check",
-      alwaysRespondWithOK = true
+      "health-check"
     )
 
     Get("/health-check") ~> healthCheckApi.routes ~> check {

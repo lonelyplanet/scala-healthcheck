@@ -7,7 +7,7 @@
 
 ### Downloading
 
-    "com.lonelyplanet" %% "scala-healthcheck" % "0.2.6"
+    "com.lonelyplanet" %% "scala-healthcheck" % "0.2.7"
 
 ### Description
 
@@ -24,6 +24,8 @@ Modules:
 
 0.2
 - Improved customization  
+- Added option to return HTTP error codes in case Health check fails
+- Improved testing
 
 0.1
 - First public release

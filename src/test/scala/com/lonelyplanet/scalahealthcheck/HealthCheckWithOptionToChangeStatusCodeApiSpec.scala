@@ -1,6 +1,6 @@
 package com.lonelyplanet.scalahealthcheck
 
-import _root_.akka.http.scaladsl.model.StatusCodes.{InternalServerError, OK}
+import _root_.akka.http.scaladsl.model.StatusCodes.{ServiceUnavailable, OK}
 
 class HealthCheckWithOptionToChangeStatusCodeApiSpec extends BaseSpec {
 
@@ -12,7 +12,7 @@ class HealthCheckWithOptionToChangeStatusCodeApiSpec extends BaseSpec {
 
   it should "set status code to 500 if dependencies are requested" in {
     Get("/health-check?include=dependencies") ~> redApi.routes ~> check {
-      status shouldBe InternalServerError
+      status shouldBe ServiceUnavailable
     }
   }
 

@@ -9,9 +9,10 @@ import org.zalando.jsonapi.json.akka.http.AkkaHttpJsonapiSupport._
 import scala.collection.immutable.Seq
 import scala.concurrent.ExecutionContextExecutor
 import com.lonelyplanet.util.OptionConversions._
-import _root_.akka.http.scaladsl.model.StatusCodes.{InternalServerError, OK}
+import _root_.akka.http.scaladsl.model.StatusCodes.OK
+import _root_.akka.http.scaladsl.model.StatusCode
 
-class HealthCheckApiRoutes(dependencies: Seq[ServiceDependency], healthCheckEndpoint: String, alwaysRespondWithOK: Boolean)(implicit val system: ActorSystem, implicit val executor: ExecutionContextExecutor) {
+class HealthCheckApiRoutes(dependencies: Seq[ServiceDependency], healthCheckEndpoint: String, statusCodeOnError: StatusCode = OK)(implicit val system: ActorSystem, implicit val executor: ExecutionContextExecutor) {
   val routes = {
     get {
       path(healthCheckEndpoint) {
@@ -38,9 +39,9 @@ class HealthCheckApiRoutes(dependencies: Seq[ServiceDependency], healthCheckEndp
     }
   }
 
-  private def responseCode(dependencyDetails: Seq[DependencyDetails]) = {
-    if (areThereAnyProblems(dependencyDetails) && !alwaysRespondWithOK) {
-      InternalServerError
+  private def responseCode(dependencyDetails: Seq[DependencyDetails]): StatusCode = {
+    if (areThereAnyProblems(dependencyDetails)) {
+      statusCodeOnError
     } else {
       OK
     }

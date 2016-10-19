@@ -9,6 +9,14 @@
 
     "com.lonelyplanet" %% "scala-healthcheck" % "0.2.7"
 
+You might need to also add our repository:
+
+```
+resolvers ++= Seq(
+  Resolver.bintrayRepo("lonelyplanet", "maven")
+)
+```    
+
 ### Description
 
 This is a simple library to provide a health checking capabilities for your Scala projects
